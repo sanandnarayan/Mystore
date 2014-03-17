@@ -5,24 +5,54 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby version 4.0.4
 
-* System dependencies
+* Spree version 2.2.0
 
-* Configuration
+* Imagemagick Installtion
 
-* Database creation
+* Rails app creation
 
-* Database initialization
+* Install gem spree_cmd
 
-* How to run the test suite
+* install spree into rails application
 
-* Services (job queues, cache servers, search engines, etc.)
+* Resolve Runtimejava script error in window
 
-* Deployment instructions
+* Create admin user in spree application
+
+* Deployment instructions on heroku
 
 * ...
 
+1. Check your ruby version 
+    \sites>rails --version
+    
+2. add gem  spree  in gemfile
+    gem 'spree', '2.2.0'
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+3. Install imagagemagick and rmagick for all images format conversion
+    for osx
+    $ brew install imagemagick
+    for window follow these steps
+    http://rails.webintellix.com/2010/01/04/how-to-install-rmagick-imagemagick-on-windows/
+    
+4. >gem install spree_cmd
+
+5. mystore>spree install --auto-accept
+
+6. Now when you run this app and if you are using Window system this gave Execjs runtime error
+    made some changes in runtime.rb file
+    JScript = ExternalRuntime.new(
+      :name        => "JScript",
+      :command     => "cscript //E:jscript //Nologo",
+      :runner_path => ExecJS.root + "/support/jscript_runner.js", // remove /U
+      :encoding    => 'UTF-8' # CScript with //U returns UTF-16LE // change UTF-16 to UTF-8
+    )
+    
+7. Now this time app run smothily now time to add new addmin user
+    mystore>rake spree_auth:admin:create
+    
+    
+
+
